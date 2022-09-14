@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Lottery</title>
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+		<link th:href="@{/css/bootstrap.min.css.map}" rel="stylesheet" />
+		<link th:href="@{/css/main.css}" rel="stylesheet"/>		
+		<link th:href="@{/css/login.css}" rel="stylesheet"/>		
+	</head>
+	<body>
+		<div class="container">			
+			<main class="form-signin">
+				<form action="#" th:action="@{/login}" th:object="${dto}" method="post">
+				  <div style="text-align: center;"><h1 class="h3 mb-3 fw-normal">SGE | Login</h1></div>
+				  
+				  <input class="form-control form-control-sm mb-1" id="username" type="text"  th:field="*{username}" placeholder="login" aria-label=".form-control-sm example">
+				  <input class="form-control form-control-sm mb-1" id="password" type="password" th:field="*{password}" placeholder="senha" aria-label=".form-control-sm example">
+				  <input class="w-100 btn btn-primary btn-sm" id="btnConfirmar" type="submit" value="Confirmar"/>
+
+				  <div class="alert alert-danger msg mt-2" role="alert">
+				  	<label th:text="${dto.msg}"></label>
+				  </div>
+				</form>
+			</main>
+		</div>
+	</body>
+	<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+<!-- 	<script th:src="@{/js/bootstrap.min.js.map}"></script> -->
+	<script th:src="@{/js/utils.js}"></script>
+</html>
