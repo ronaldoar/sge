@@ -3,14 +3,22 @@
 	<head><meta charset="UTF-8"></head>
 	<body>
 		<div th:fragment="nav-sidebar">
-		    <h1>Dashboard de Eventos</h1>
-		    <p class="fs-5 col-md-8">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
 		
-		    <div class="mb-5">
-		      <a href="../examples/" class="btn btn-primary btn-lg px-4">Criar um evento</a>
-		    </div>
+			<ul class="nav justify-content-end">
+			  <li class="nav-item">
+			    <a class="nav-link active" aria-current="page" th:href="@{/menu/dashboard}">Dashboard</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link active" aria-current="page" th:href="@{/menu/contatos}">Contatos</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" th:href="@{/menu/locais}">Locais</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" th:href="@{/menu/configuracoes}">Configurações</a>
+			  </li>
+			</ul>
 		
-		    <hr class="col-3 col-md-2 mb-5">
 		</div>
 	</body>
 </html>
