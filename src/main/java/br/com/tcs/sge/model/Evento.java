@@ -33,9 +33,6 @@ public class Evento implements Serializable {
 	@Column(name="DS_DESCRICAO", length=50, nullable=false)
 	private String descricao;
 
-	@Column(name="NR_NUMERO", length=5, nullable=false)
-	private Integer numero;
-	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="CD_LOCAL", nullable=false)
 	private Local local;
@@ -84,14 +81,6 @@ public class Evento implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Integer getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
 	public Local getLocal() {
 		return local;
 	}
@@ -126,9 +115,8 @@ public class Evento implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Evento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", numero=" + numero
-				+ ", local=" + local + ", dtCadastro=" + dtCadastro + ", dtUltAlt=" + dtUltAlt + ", ativo=" + ativo
-				+ "]";
+		return "Evento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", local=" + local
+				+ ", dtCadastro=" + dtCadastro + ", dtUltAlt=" + dtUltAlt + ", ativo=" + ativo + "]";
 	}
 
 	@Override
