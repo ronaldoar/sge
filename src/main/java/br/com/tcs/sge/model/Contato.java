@@ -6,9 +6,12 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -27,6 +30,10 @@ import javax.persistence.Table;
 		
 		@Column(name="DS_TELEFONE", length = 11, nullable = false)
 		private Long telefone;
+		
+		@ManyToOne(fetch=FetchType.LAZY)
+		@JoinColumn(name="CD_CATEGORIA", nullable=false)
+		private Categoria categoria;
 		
 		@Column(name="DT_CADASTRO", nullable=false)
 		private LocalDateTime dtCadastro;
@@ -70,6 +77,14 @@ import javax.persistence.Table;
 
 		public void setTelefone(Long telefone) {
 			this.telefone = telefone;
+		}
+
+		public Categoria getCategoria() {
+			return categoria;
+		}
+
+		public void setCategoria(Categoria categoria) {
+			this.categoria = categoria;
 		}
 
 		public LocalDateTime getDtCadastro() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 	<head><meta charset="UTF-8" /></head>
 	<body>
 		<div layout:fragment="body">	
@@ -45,3 +45,36 @@
 		</div>
 	</body>
 </html>
+<script th:inline="javascript">
+
+	$(document).ready(function(){
+		listarContatosAjax();
+	});
+
+	function listarContatosAjax(){
+		$.ajax({
+		    type: 'GET',
+		    url: 'http://localhost:8090/listar',
+		    cache: false,
+	        timeout: 600000,
+	        contentType: "application/json",
+	        dataType: 'json',
+	        statusCode: {
+		
+	    	    200: function(lista){
+	    	    	console.log(lista);
+	    	    },
+		    	403: function(ex){
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+		    		console.log('[NEGADO]: '+JSON.stringify(ex));
+		    	},
+	    	    500: function(ex) {
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+					console.log('[ERROR]: '+JSON.stringify(ex));
+		    	}
+		    }
+		});
+}
+</script>
