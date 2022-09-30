@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 
@@ -15,6 +16,7 @@ import br.com.tcs.sge.controller.dto.ContatoDto;
 import br.com.tcs.sge.service.ContatoService;
 
 @Controller
+@RequestMapping("/contato")
 public class ContatoController {
 	private static final Logger logger = LoggerFactory.getLogger(ContatoController.class);
 	
