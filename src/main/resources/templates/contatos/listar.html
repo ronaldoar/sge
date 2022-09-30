@@ -75,7 +75,7 @@
                 $('<td>').text(item.nome),
                 $('<td>').text(item.telefone),
                 $('<td>').text(item.categoria),
-                $('<td>').text(item.ativo),
+                $('<td>').text(parseAtivo(item.ativo)),
                 $('<td>').text(parseDate(item.dtUltAlt)),
                 $('<td>').html("<a href='/contato/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
 
@@ -83,4 +83,9 @@
 		});
 	}
 	
+	
+	function parseAtivo(ativo){
+		if(ativo)return 'Sim';
+		return 'Não';
+	}
 </script>

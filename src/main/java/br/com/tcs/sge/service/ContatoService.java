@@ -1,6 +1,7 @@
 package br.com.tcs.sge.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class ContatoService {
 	
 	public List<Contato> buscarTodos(){
 		return repository.findAll();
+	}
+	
+	public Optional<Contato> buscarPorId(Long id) {
+		return repository.findById(id);
 	}
 }

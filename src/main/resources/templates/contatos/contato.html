@@ -16,4 +16,38 @@
 	</body>
 </html>
 <script th:inline="javascript">
+	$(document).ready(function(){
+		bucarContatoAjax();
+	});
+	
+	function bucarContatoAjax(){
+		$.ajax({
+		    type: 'GET',
+		    url: 'http://localhost:8090/contato/buscar/',
+		    cache: false,
+	        timeout: 600000,
+	        contentType: "application/json",
+	        dataType: 'json',
+	        statusCode: {
+		
+	    	    200: function(contato){
+	    	    	buildContato(contato);
+	    	    },
+		    	403: function(ex){
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+		    		console.log('[NEGADO]: '+JSON.stringify(ex));
+		    	},
+	    	    500: function(ex) {
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+					console.log('[ERROR]: '+JSON.stringify(ex));
+		    	}
+		    }
+		});
+	}
+	
+	function buildContato(contato){
+		
+	}
 </script>

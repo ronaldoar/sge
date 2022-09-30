@@ -37,8 +37,22 @@ public class ContatoController {
 	}
 	
 
-	@GetMapping("/consultar/{id}")
-	public String contato(@PathVariable Long id) {
+	@GetMapping("/consultar")
+	public String carregarPagina() {
 		return "contatos/contato";
+	}
+	
+
+	@GetMapping("/consultar/{id}")
+	public ResponseEntity<?> consultar(@PathVariable Long id) {
+		
+		try {
+			String gson = new Gson().toJson(ContatoDto.parse(service.buscarPorId(id).get()));
+			return new ResponseEntity<>(gson, HttpStatus.OK);
+			
+		}catch(Exception ex) {
+			logger.error("[CONTATO-LISTAR-TODOS]: "+ex.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }
