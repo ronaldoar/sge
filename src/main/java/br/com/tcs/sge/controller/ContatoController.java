@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.google.gson.Gson;
 
@@ -31,5 +32,11 @@ public class ContatoController {
 			logger.error("[CONTATO-LISTAR-TODOS]: "+ex.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+
+	@GetMapping("/consultar/{id}")
+	public String contato(@PathVariable Long id) {
+		return "contatos/contato";
 	}
 }

@@ -6,45 +6,29 @@
 		   <main class="container">
 			  <div class="bg-light p-5 rounded mt-3">
 			    <h1>Contatos</h1>
-			    <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
+			    <p class="lead">Apresenta todos os contatos cadastrados no sistema, ativos ou inativos.</p>
 			    
-			    
-			    <table class="table">
+			    <table class="table" id="tblContatosID">
 				  <thead>
 				    <tr>
-				      <th scope="col">#</th>
-				      <th scope="col">First</th>
-				      <th scope="col">Last</th>
-				      <th scope="col">Handle</th>
+				      <th scope="col">NOME</th>
+				      <th scope="col">TELEFONE</th>
+				      <th scope="col">CATEGORIA</th>
+				      <th scope="col">ATIVO</th>
+				      <th scope="col">DT ATUALIZAÇÃO</th>
+				      <th scope="col">DETALHES</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td colspan="2">Larry the Bird</td>
-				      <td>@twitter</td>
-				    </tr>
 				  </tbody>
 				</table>
 							    
-			    
 			  </div>
 			</main>
 		</div>
 	</body>
 </html>
+
 <script th:inline="javascript">
 
 	$(document).ready(function(){
@@ -62,7 +46,7 @@
 	        statusCode: {
 		
 	    	    200: function(lista){
-	    	    	console.log(lista);
+	    	    	buildTable(lista);
 	    	    },
 		    	403: function(ex){
 					$('.msg').text(ex.responseText);
@@ -76,5 +60,27 @@
 		    	}
 		    }
 		});
-}
+	}
+	
+	
+	/**
+	 * Monta a tabela de contatos
+	 */
+	function buildTable(lista){
+		
+		$.each(lista, function(i, item){
+			
+        	var jQuerytr = $('<tr>').append(
+        			
+                $('<td>').text(item.nome),
+                $('<td>').text(item.telefone),
+                $('<td>').text(item.categoria),
+                $('<td>').text(item.ativo),
+                $('<td>').text(parseDate(item.dtUltAlt)),
+                $('<td>').html("<a href='/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
+
+        	).appendTo('#tblContatosID tbody');
+		});
+	}
+	
 </script>

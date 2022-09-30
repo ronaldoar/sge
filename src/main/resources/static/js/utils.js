@@ -20,3 +20,19 @@ function stringIsNull(value){
 function stringIsNotNull(value){
     return !stringIsNull(value);
 }
+
+
+/**
+ * Monta data no formato 
+ */
+function parseDate(data){
+	var day   = data.date.day;
+	var month = data.date.month;
+	var year  = data.date.year;
+	return day+'/'+month+'/'+year;
+}
+
+
+
+            
+
