@@ -17,15 +17,15 @@
 				  <input class="form-control form-control-sm mb-1" id="username" type="text"  th:field="*{username}" placeholder="login" aria-label=".form-control-sm example">
 				  <input class="form-control form-control-sm mb-1" id="password" type="password" th:field="*{password}" placeholder="senha" aria-label=".form-control-sm example">
 				  <input class="w-100 btn btn-primary btn-sm" id="btnConfirmar" type="submit" value="Confirmar"/>
-
-				  <div class="alert alert-danger msg mt-2" role="alert">
-				  	<label th:text="${dto.msg}"></label>
-				  </div>
+	
+<!-- 				  <div class="alert alert-danger msg mt-2" role="alert"> -->
+				  	<label th:text="${message}"></label>
+<!-- 				  </div> -->
 				</form>
 			</main>
 		</div>
 	</body>
-	<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/js/jquery-3.6.1.min.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 <!-- 	<script th:src="@{/js/bootstrap.min.js.map}"></script> -->
 	<script th:src="@{/js/utils.js}"></script>

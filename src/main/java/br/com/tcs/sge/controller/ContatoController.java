@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
@@ -36,23 +38,21 @@ public class ContatoController {
 		}
 	}
 	
-
-	@GetMapping("/consultar")
-	public String carregarPagina() {
-		return "contatos/contato";
-	}
-	
-
 	@GetMapping("/consultar/{id}")
-	public ResponseEntity<?> consultar(@PathVariable Long id) {
+	public ModelAndView consultar(@PathVariable Long id) {
 		
 		try {
-			String gson = new Gson().toJson(ContatoDto.parse(service.buscarPorId(id).get()));
-			return new ResponseEntity<>(gson, HttpStatus.OK);
+			 String gson = new Gson().toJson(ContatoDto.parse(service.buscarPorId(id).get()));
+			 ModelAndView modelAndView = new ModelAndView();	
+			 modelAndView.addObject("contato", gson);
+			 modelAndView.setViewName("contatos/contato");
+			 return modelAndView;
 			
 		}catch(Exception ex) {
-			logger.error("[CONTATO-LISTAR-TODOS]: "+ex.getMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			 logger.error("[CONTATO-LISTAR-TODOS]: "+ex.getMessage());
+			 ModelAndView modelAndView = new ModelAndView();	
+			 modelAndView.setViewName("contatos/contato");
+			 return modelAndView;
 		}
 	}
 }

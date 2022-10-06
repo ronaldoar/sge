@@ -4,12 +4,44 @@
 	<body>
 		<div layout:fragment="body">	
 		   <main class="container">
+			  <span class="hideObject" th:text="${contato}"></span>
+			  
 			  <div class="bg-light p-5 rounded mt-3">
-			    <h1>Contatos</h1>
+			    <h1>Contato</h1>
 			    <p class="lead">Apresenta todos os contatos cadastrados no sistema, ativos ou inativos.</p>
 			    
-			    contato
-							    
+			    <form class="row g-3">
+				  <div class="col-md-6">
+				    <label for="nomeID" class="form-label">Nome</label>
+				    <input type="email" class="form-control" id="nomeID">
+				  </div>
+				  <div class="col-md-6">
+				    <label for="telefoneID" class="form-label">Telefone</label>
+				    <input type="text" class="form-control" id="telefoneID">
+				  </div>
+				  <div class="col-12">
+				    <label for="inputAddress" class="form-label">Email</label>
+				    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+				  </div>
+				  <div class="col-md-4">
+				    <label for="inputState" class="form-label">Categoria</label>
+				    <select id="inputState" class="form-select">
+				      <option selected>Choose...</option>
+				      <option>...</option>
+				    </select>
+				  </div>
+				  <div class="col-md-2">
+				     <label for="inputState" class="form-label">Ativo</label>
+				    <select id="inputState" class="form-select">
+				      <option selected>Choose...</option>
+				      <option>...</option>
+				    </select>
+				  </div>
+				  <div class="col-12">
+				    <button type="submit" class="btn btn-primary">Atualizar</button>
+				  </div>
+				</form>		  
+				  
 			  </div>
 			</main>
 		</div>
@@ -17,37 +49,13 @@
 </html>
 <script th:inline="javascript">
 	$(document).ready(function(){
-		bucarContatoAjax();
+		buildContato();
 	});
 	
-	function bucarContatoAjax(){
-		$.ajax({
-		    type: 'GET',
-		    url: 'http://localhost:8090/contato/buscar/',
-		    cache: false,
-	        timeout: 600000,
-	        contentType: "application/json",
-	        dataType: 'json',
-	        statusCode: {
+	function buildContato(){
+		var contato = JSON.parse($('.hideObject').text());
 		
-	    	    200: function(contato){
-	    	    	buildContato(contato);
-	    	    },
-		    	403: function(ex){
-					$('.msg').text(ex.responseText);
-		            $('.msg').show();
-		    		console.log('[NEGADO]: '+JSON.stringify(ex));
-		    	},
-	    	    500: function(ex) {
-					$('.msg').text(ex.responseText);
-		            $('.msg').show();
-					console.log('[ERROR]: '+JSON.stringify(ex));
-		    	}
-		    }
-		});
-	}
-	
-	function buildContato(contato){
-		
+		$('#nomeID').val(contato.nome);
+		$('#telefoneID').val(contato.telefone);
 	}
 </script>

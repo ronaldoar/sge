@@ -6,23 +6,20 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TB_CONTATO")
-	public class Contato implements Serializable {
+@Table(name="TB_ADMIN")
+	public class Admin implements Serializable {
 		private static final long serialVersionUID = 1L;
 		
 		@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name="CD_CONTATO", nullable = false)
+		@Column(name="CD_ADMIN", nullable = false)
 		private Long id;
 		
 		@Column(name="DS_NOME", length = 100, nullable = false)
@@ -30,17 +27,12 @@ import javax.persistence.Table;
 
 		@Column(name="DS_EMAIL", length = 100, nullable = false)
 		private String email;
+
+		@Column(name="DS_PASSWORD", length = 100, nullable = false)
+		private String password;
 		
 		@Column(name="DS_TELEFONE", length = 11, nullable = false)
 		private Long telefone;
-		
-		@ManyToOne(fetch=FetchType.LAZY)
-		@JoinColumn(name="CD_CATEGORIA", nullable=false)
-		private Categoria categoria;
-
-		@ManyToOne(fetch=FetchType.LAZY)
-		@JoinColumn(name="CD_ADMIN", nullable=false)
-		private Admin admin;
 		
 		@Column(name="DT_CADASTRO", nullable=false)
 		private LocalDateTime dtCadastro;
@@ -82,6 +74,14 @@ import javax.persistence.Table;
 			return email;
 		}
 
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
 		public void setEmail(String email) {
 			this.email = email;
 		}
@@ -92,22 +92,6 @@ import javax.persistence.Table;
 
 		public void setTelefone(Long telefone) {
 			this.telefone = telefone;
-		}
-
-		public Categoria getCategoria() {
-			return categoria;
-		}
-
-		public void setCategoria(Categoria categoria) {
-			this.categoria = categoria;
-		}
-
-		public Admin getAdmin() {
-			return admin;
-		}
-
-		public void setAdmin(Admin admin) {
-			this.admin = admin;
 		}
 
 		public LocalDateTime getDtCadastro() {
@@ -147,7 +131,7 @@ import javax.persistence.Table;
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			Contato other = (Contato) obj;
+			Admin other = (Admin) obj;
 			return Objects.equals(id, other.id);
 		}
 }

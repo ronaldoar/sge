@@ -46,6 +46,10 @@ public class Evento implements Serializable {
 	@Column(name="FL_ATIVO", nullable=false)
 	private boolean ativo;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CD_ADMIN", nullable=false)
+	private Admin admin;
+	
 	@PreUpdate
     public void preUpdate() {
 		dtUltAlt = LocalDateTime.now();
@@ -111,6 +115,14 @@ public class Evento implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
 	@Override
