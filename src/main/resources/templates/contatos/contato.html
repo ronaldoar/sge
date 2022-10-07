@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
-	<head><meta charset="UTF-8" /></head>
+	<head>
+		<meta charset="UTF-8" />
+		<link th:href="@{/css/contato.css}" rel="stylesheet" />
+	</head>
 	<body>
 		<div layout:fragment="body">	
 		   <main class="container">
-			  <span class="hideObject" th:text="${contato}"></span>
+		       <input type="hidden"/>
+		   
+			  <span class="hideContato" th:text="${contato}"></span>
+			  <span class="hideCategorias" th:text="${categorias}"></span>
 			  
 			  <div class="bg-light p-5 rounded mt-3">
 			    <h1>Contato</h1>
@@ -21,20 +27,18 @@
 				  </div>
 				  <div class="col-12">
 				    <label for="inputAddress" class="form-label">Email</label>
-				    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+				    <input type="text" class="form-control" id="emailID" placeholder="1234 Main St">
 				  </div>
 				  <div class="col-md-4">
-				    <label for="inputState" class="form-label">Categoria</label>
-				    <select id="inputState" class="form-select">
-				      <option selected>Choose...</option>
-				      <option>...</option>
+				    <label for="categoriasID" class="form-label">Categoria</label>
+				    <select id="categoriasID" class="form-select">
+				      <option selected>Selecione...</option>
 				    </select>
 				  </div>
 				  <div class="col-md-2">
-				     <label for="inputState" class="form-label">Ativo</label>
-				    <select id="inputState" class="form-select">
-				      <option selected>Choose...</option>
-				      <option>...</option>
+				     <label for="c" class="form-label">Ativo</label>
+				    <select id="categoriasID" class="form-select">
+				      <option selected>Selecione...</option>
 				    </select>
 				  </div>
 				  <div class="col-12">
@@ -50,12 +54,24 @@
 <script th:inline="javascript">
 	$(document).ready(function(){
 		buildContato();
+		buildCategorias();
 	});
 	
 	function buildContato(){
-		var contato = JSON.parse($('.hideObject').text());
+		var contato = JSON.parse($('.hideContato').text());
 		
 		$('#nomeID').val(contato.nome);
 		$('#telefoneID').val(contato.telefone);
+		$('#emailID').val(contato.email);
+	}
+	
+	function buildCategorias(){
+		var categorias = JSON.parse($('.hideCategorias').text());
+		$.each(categorias, function (index, c) {
+		    $('#categoriasID').append($('<option/>', { 
+		        value: c.id,
+		        text : c.nome 
+		    }));
+		});   
 	}
 </script>

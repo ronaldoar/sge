@@ -11,6 +11,7 @@ public class ContatoDto {
 	private Long id;
 	private String nome;
 	private Long telefone;
+	private String email;
 	private String categoria;
 	private LocalDateTime dtCadastro;
 	private LocalDateTime dtUltAlt;
@@ -32,6 +33,7 @@ public class ContatoDto {
 		c.setId(contato.getId());
 		c.setNome(contato.getNome());
 		c.setTelefone(contato.getTelefone());
+		c.setEmail(contato.getEmail());
 		return c;
 	}
 	
@@ -52,6 +54,12 @@ public class ContatoDto {
 	}
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getCategoria() {
 		return categoria;

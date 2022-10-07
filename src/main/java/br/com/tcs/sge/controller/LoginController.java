@@ -45,7 +45,7 @@ public class LoginController {
 				return "redirect:/index";
 				
 			}else {
-				return "/dashboard";
+				return "dashboard";
 			}
 			
 		}catch(Exception ex) {
