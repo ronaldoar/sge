@@ -14,9 +14,9 @@
 				      <th scope="col">NOME</th>
 				      <th scope="col">TELEFONE</th>
 				      <th scope="col">CATEGORIA</th>
-				      <th scope="col">ATIVO</th>
+				      <th scope="col" class="table-td-center">ATIVO</th>
 				      <th scope="col">DT ATUALIZAÇÃO</th>
-				      <th scope="col">DETALHES</th>
+				      <th scope="col" class="table-td-center">EDITAR</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -75,9 +75,9 @@
                 $('<td>').text(item.nome),
                 $('<td>').text(item.telefone),
                 $('<td>').text(item.categoria),
-                $('<td>').text(parseAtivo(item.ativo)),
+                $('<td class="table-td-center">').text(parseAtivo(item.ativo)),
                 $('<td>').text(parseDate(item.dtUltAlt)),
-                $('<td>').html("<a href='/contato/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
+                $('<td class="table-td-center">').html("<a href='/contato/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
 
         	).appendTo('#tblContatosID tbody');
 		});

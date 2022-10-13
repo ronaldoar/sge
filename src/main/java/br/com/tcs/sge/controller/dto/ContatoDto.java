@@ -13,6 +13,7 @@ public class ContatoDto {
 	private Long telefone;
 	private String email;
 	private String categoria;
+	private Long categoriaId;
 	private LocalDateTime dtCadastro;
 	private LocalDateTime dtUltAlt;
 	private boolean ativo;
@@ -28,6 +29,7 @@ public class ContatoDto {
 		ContatoDto c = new ContatoDto();
 		c.setAtivo(contato.isAtivo());
 		c.setCategoria(contato.getCategoria().getNome());
+		c.setCategoriaId(contato.getCategoria().getId());
 		c.setDtCadastro(contato.getDtCadastro());
 		c.setDtUltAlt(contato.getDtUltAlt());
 		c.setId(contato.getId());
@@ -60,6 +62,12 @@ public class ContatoDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Long getCategoriaId() {
+		return categoriaId;
+	}
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
 	}
 	public String getCategoria() {
 		return categoria;

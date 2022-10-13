@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import br.com.tcs.sge.controller.dto.CategoriaDto;
 import br.com.tcs.sge.controller.dto.ContatoDto;
-import br.com.tcs.sge.model.Categoria;
 import br.com.tcs.sge.service.CategoriaService;
 import br.com.tcs.sge.service.ContatoService;
 
