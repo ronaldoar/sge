@@ -32,4 +32,9 @@ public class MenuController {
 	public String evento() {
 		return "/eventos/cadastrar";
 	}
+
+	@GetMapping(value="/evento/listar")
+	public String eventos() {
+		return "/eventos/listar";
+	}
 }

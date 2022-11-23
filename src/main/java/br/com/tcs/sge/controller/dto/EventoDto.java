@@ -30,7 +30,17 @@ public class EventoDto {
 		e.setDtCadastro(evento.getDtCadastro());
 		e.setDtUltAlt(evento.getDtUltAlt());
 		e.setId(evento.getId());
-		e.setLocal(evento.getLocal());
+		
+		LocalDto l = new LocalDto();
+		l.setAtivo(evento.getLocal().isAtivo());
+		l.setBairro(evento.getLocal().getBairro());
+		l.setCep(evento.getLocal().getCep());
+		l.setCidade(evento.getLocal().getCidade().getNome());
+		l.setEndereco(evento.getLocal().getEndereco());
+		l.setNumero(evento.getLocal().getNumero());
+		l.setUf(evento.getLocal().getCidade().getUf());
+		l.setId(evento.getLocal().getId());
+		e.setLocal(l);
 		e.setTitulo(evento.getTitulo());
 		return e;		
 	}

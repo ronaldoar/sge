@@ -24,7 +24,7 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoservice;
 	
-	@GetMapping("/listar")
+	@GetMapping("/eventos")
 	public ResponseEntity<?> listar(){
 		try {
 			List<EventoDto> todos = EventoDto.parse(eventoservice.buscarTodos());
