@@ -1,18 +1,76 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 	<head><meta charset="UTF-8" /></head>
 	<body>
 		<div layout:fragment="body">	
 		   <main class="container">
 			  <div class="bg-light p-5 rounded mt-3">
-			    <h1>Cadastrar Evento</h1>
-			    <p class="lead">Define um evento futuro</p>
+			    <h1>Evento</h1>
+			    <p class="lead">Apresenta lista de eventos cadastradas no sistema.</p>
 			    
-			    
-			   	LISTA DE EVENTOS
+			    <table class="table" id="tblEventosID">
+			    	<thead>
+			    		<tr>
+			    			<th scope="col">TITULO</th>
+			    			<th scope="col">LOCAL</th>
+			    		</tr>
+			    	</thead>
+			    	<tbody></tbody>	    	
+			    </table>
 			    
 			  </div>
 		  </main>
 		</div>
 	</body>
 </html>
+
+<script th:inline="javascript">
+	$(document).ready(function(){
+		listarEventosAjax();
+	});
+	
+	function listarEventosAjax(){
+		$.ajax({
+			type:'GET',
+			url: 'https://localhost:8090/eventos/listar',
+			cache: false,
+			timeout: 600000,
+			contentType: "application/json",
+			dataType: 'json',
+			statusCode: {
+				200: function(ex){
+					buildTable(listar);
+				},
+				403: function(ex){
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+		    		console.log('[NEGADO]: '+JSON.stringify(ex));
+		    	},
+	    	    500: function(ex) {
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+					console.log('[ERROR]: '+JSON.stringify(ex));
+	    	    }
+			}
+		});
+	}
+	
+function buildTable(lista){
+		
+		$.each(lista, function(i, item){
+			
+        	var tr = $('<tr>').append(
+        			
+                $('<td>').text(item.titulo),
+                $('<td>').text(item.local),
+
+        	).appendTo('#tblContatosID tbody');
+		});
+	}
+	
+	
+	function parseAtivo(ativo){
+		if(ativo)return 'Sim';
+		return 'Não';
+	}
+</script>
