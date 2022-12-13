@@ -15,6 +15,7 @@ import br.com.tcs.sge.controller.dto.LoginDto;
 import br.com.tcs.sge.model.Admin;
 import br.com.tcs.sge.service.AdminService;
 
+
 @Controller
 public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
