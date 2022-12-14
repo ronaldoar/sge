@@ -30,17 +30,18 @@
 	
 	function listarEventosAjax(){
 		$.ajax({
-			type:'GET',
-			url: 'https://localhost:8090/eventos/listar',
-			cache: false,
-			timeout: 600000,
-			contentType: "application/json",
-			dataType: 'json',
-			statusCode: {
-				200: function(ex){
-					buildTable(listar);
-				},
-				403: function(ex){
+		    type: 'GET',
+		    url: 'http://localhost:8090/evento/eventos',
+		    cache: false,
+	        timeout: 600000,
+	        contentType: "application/json",
+	        dataType: 'json',
+	        statusCode: {
+		
+	    	    200: function(lista){
+	    	    	buildTable(lista);
+	    	    },
+		    	403: function(ex){
 					$('.msg').text(ex.responseText);
 		            $('.msg').show();
 		    		console.log('[NEGADO]: '+JSON.stringify(ex));
@@ -49,17 +50,16 @@
 					$('.msg').text(ex.responseText);
 		            $('.msg').show();
 					console.log('[ERROR]: '+JSON.stringify(ex));
-	    	    }
-			}
+		    	}
+		    }
 		});
 	}
 	
-function buildTable(lista){
+	function buildTable(lista){
 		
 		$.each(lista, function(i, item){
 			
         	var tr = $('<tr>').append(
-        			
                 $('<td>').text(item.titulo),
                 $('<td>').text(item.local),
 
