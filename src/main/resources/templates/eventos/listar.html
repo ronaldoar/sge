@@ -62,7 +62,7 @@
 			
         	var tr = $('<tr>').append(
                 $('<td>').text(item.titulo),
-                $('<td>').text(parseDate(item.)),
+                $('<td>').text(parseDate(item.dtUltAlt)),
                 $('<td class="table-td-center">').html("<a href='/evntos/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
 
         	).appendTo('#tblEventosID tbody');
