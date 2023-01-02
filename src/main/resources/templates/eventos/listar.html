@@ -12,7 +12,8 @@
 			    	<thead>
 			    		<tr>
 			    			<th scope="col">TITULO</th>
-			    			<th scope="col">LOCAL</th>
+			    			<th scope="col">DATA</th>
+			    			<th scope="col" class="table-td-center">DETALHES</th>
 			    		</tr>
 			    	</thead>
 			    	<tbody></tbody>	    	
@@ -61,9 +62,10 @@
 			
         	var tr = $('<tr>').append(
                 $('<td>').text(item.titulo),
-                $('<td>').text(item.local),
+                $('<td>').text(parseDate(item.)),
+                $('<td class="table-td-center">').html("<a href='/evntos/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
 
-        	).appendTo('#tblContatosID tbody');
+        	).appendTo('#tblEventosID tbody');
 		});
 	}
 	
