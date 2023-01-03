@@ -4,7 +4,7 @@
 	<body>
 		<div layout:fragment="body">	
 		   <main class="container">
-			  <div class="bg-light p-5 rounded mt-3">
+			 <div class="bg-light p-5 rounded mt-3">
 			    <h1>Evento</h1>
 			    <p class="lead">Apresenta lista de eventos cadastradas no sistema.</p>
 			    
@@ -12,13 +12,32 @@
 			    	<thead>
 			    		<tr>
 			    			<th scope="col">TITULO</th>
-			    			<th scope="col">DATA</th>
+			    			<th scope="col">DATA INÍCIO</th>
+			    			<th scope="col">DATA FIM</th>
+			    			<th scope="col" class="table-td-center">ATIVO</th>
 			    			<th scope="col" class="table-td-center">DETALHES</th>
 			    		</tr>
 			    	</thead>
 			    	<tbody></tbody>	    	
 			    </table>			    
+			</div>
+			<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Ativar Evento</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        ...
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
 			  </div>
+			</div>
 		  </main>
 		</div>
 	</body>
@@ -62,8 +81,10 @@
 			
         	var tr = $('<tr>').append(
                 $('<td>').text(item.titulo),
-                $('<td>').text(parseDate(item.dtUltAlt)),
-                $('<td class="table-td-center">').html("<a href='/evntos/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
+                $('<td>').text(parseDate(item.dtIniEvento)),
+                $('<td>').text(parseDate(item.dtFimEvento)),
+                $('<td onclick="openModal()" class="table-td-center">').html("<img src='/img/edit.svg'></img>"),
+                $('<td onclick="openModal()" class="table-td-center">').html("<a href='/eventos/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
 
         	).appendTo('#tblEventosID tbody');
 		});
@@ -73,5 +94,40 @@
 	function parseAtivo(ativo){
 		if(ativo)return 'Sim';
 		return 'Não';
+	}
+	
+	
+	///// FUNCOES DE MODAL /////////////////////////////////////////////////////////////////////////////////////////
+	function openModal(){
+		$('#myModal').modal('show'); 
+
+		var confirmado = './img/icons/component/check-square.svg';
+		var pathAtual  = $('#ico-1').attr('src');
+
+		if(pathAtual === confirmado){
+			$('#staticBackdropLabel').text('Cancelar');
+			$('#infoID').text('Deseja cancelar o agendamento?');
+		}else {
+			$('#staticBackdropLabel').text('Confirmar');
+			$('#infoID').text('Deseja confimar o agendamento?');
+		}
+	} 
+
+	function closeModal(){
+		$('#myModal').modal('hide'); 
+
+		var confirmado = './img/icons/component/check-square.svg';
+		var pathAtual  = $('#ico-1').attr('src');
+
+		if(pathAtual === confirmado){
+			$('#ico-1').attr('src', './img/icons/component/square.svg');
+			$('#staticBackdropLabel').text('Cancelar');
+			$('#infoID').text('Deseja cancelar o agendamento?');
+
+		}else {
+			$('#ico-1').attr('src', './img/icons/component/check-square.svg');
+			$('#staticBackdropLabel').text('Confirmar');
+			$('#infoID').text('Deseja confimar o agendamento?');
+		}
 	}
 </script>

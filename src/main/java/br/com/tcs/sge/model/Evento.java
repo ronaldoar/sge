@@ -37,9 +37,16 @@ public class Evento implements Serializable {
 	@JoinColumn(name="CD_LOCAL", nullable=false)
 	private Local local;
 	
+	@Column(name="DT_INI_EVENTO", nullable=false)
+	private LocalDateTime dtIniEvento;
+
+	@Column(name="DT_FIM_EVENTO", nullable=false)
+	private LocalDateTime dtFimEvento;
+
 	@Column(name="DT_CADASTRO", nullable=false)
 	private LocalDateTime dtCadastro;
 
+	
 	@Column(name="DT_ULT_ALT", nullable=false)
 	private LocalDateTime dtUltAlt;
 
@@ -83,6 +90,22 @@ public class Evento implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public LocalDateTime getDtIniEvento() {
+		return dtIniEvento;
+	}
+
+	public void setDtIniEvento(LocalDateTime dtIniEvento) {
+		this.dtIniEvento = dtIniEvento;
+	}
+
+	public LocalDateTime getDtFimEvento() {
+		return dtFimEvento;
+	}
+
+	public void setDtFimEvento(LocalDateTime dtFimEvento) {
+		this.dtFimEvento = dtFimEvento;
 	}
 
 	public Local getLocal() {

@@ -14,6 +14,8 @@ public class EventoDto {
 	private LocalDto local;
 	private LocalDateTime dtCadastro;
 	private LocalDateTime dtUltAlt;
+	private LocalDateTime dtIniEvento;
+	private LocalDateTime dtFimEvento;
 	private boolean ativo;
 	
 	public static List<EventoDto> parse(List<Evento> eventos){
@@ -29,8 +31,8 @@ public class EventoDto {
 		e.setDescricao(evento.getDescricao());
 		e.setDtCadastro(evento.getDtCadastro());
 		e.setDtUltAlt(evento.getDtUltAlt());
-		e.setId(evento.getId());
-		
+		e.setDtIniEvento(evento.getDtIniEvento());
+		e.setDtFimEvento(evento.getDtFimEvento());	
 		LocalDto l = new LocalDto();
 		l.setAtivo(evento.getLocal().isAtivo());
 		l.setBairro(evento.getLocal().getBairro());
@@ -91,6 +93,22 @@ public class EventoDto {
 
 	public void setDtUltAlt(LocalDateTime dtUltAlt) {
 		this.dtUltAlt = dtUltAlt;
+	}
+
+	public LocalDateTime getDtIniEvento() {
+		return dtIniEvento;
+	}
+
+	public void setDtIniEvento(LocalDateTime dtIniEvento) {
+		this.dtIniEvento = dtIniEvento;
+	}
+
+	public LocalDateTime getDtFimEvento() {
+		return dtFimEvento;
+	}
+
+	public void setDtFimEvento(LocalDateTime dtFimEvento) {
+		this.dtFimEvento = dtFimEvento;
 	}
 
 	public boolean isAtivo() {
