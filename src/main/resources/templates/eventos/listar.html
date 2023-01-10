@@ -25,15 +25,15 @@
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Ativar Evento</h5>
+			        <h5 class="modal-title" id="txtID"></h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
 			        ...
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			        <button type="button" class="btn btn-primary">Confirmar</button>
 			      </div>
 			    </div>
 			  </div>
@@ -83,19 +83,27 @@
                 $('<td>').text(item.titulo),
                 $('<td>').text(parseDate(item.dtIniEvento)),
                 $('<td>').text(parseDate(item.dtFimEvento)),
-                $('<td onclick="openModal()" class="table-td-center">').html("<img src='/img/edit.svg'></img>"),
+                $('<td onclick="openModal(),  alteraMsg('+item.ativo+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo)),
                 $('<td onclick="openModal()" class="table-td-center">').html("<a href='/eventos/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
-
         	).appendTo('#tblEventosID tbody');
 		});
 	}
 	
-	
-	function parseAtivo(ativo){
-		if(ativo)return 'Sim';
-		return 'Não';
+	function alteraMsg(ativo){
+		if(ativo){
+			$('#txtID').text("Desativar evento");
+		}else {
+			$('#txtID').text("Ativar evento");		
+		}
 	}
 	
+	function verificaStatus(ativo){
+		if(ativo){
+			return "<img src='/img/check-square.svg'></img>";
+		}else {
+			return "<img src='/img/square.svg'></img>";
+		}
+	}
 	
 	///// FUNCOES DE MODAL /////////////////////////////////////////////////////////////////////////////////////////
 	function openModal(){
