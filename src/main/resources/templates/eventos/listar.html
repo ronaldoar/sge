@@ -29,11 +29,11 @@
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			        ...
+			        <span id="infoID"></span>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			        <button type="button" class="btn btn-primary">Confirmar</button>
+			        <button type="button" onclick="closeModal()" class="btn btn-primary">Confirmar</button>
 			      </div>
 			    </div>
 			  </div>
@@ -84,7 +84,7 @@
                 $('<td>').text(parseDate(item.dtIniEvento)),
                 $('<td>').text(parseDate(item.dtFimEvento)),
                 $('<td onclick="openModal(),  alteraMsg('+item.ativo+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo)),
-                $('<td onclick="openModal()" class="table-td-center">').html("<a href='/eventos/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
+                $('<td class="table-td-center">').html("<a href='/eventos/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
         	).appendTo('#tblEventosID tbody');
 		});
 	}
@@ -99,42 +99,39 @@
 	
 	function verificaStatus(ativo){
 		if(ativo){
-			return "<img src='/img/check-square.svg'></img>";
+			return "<img id='ico-1' src='/img/check-square.svg'></img>";
 		}else {
-			return "<img src='/img/square.svg'></img>";
+			return "<img id='ico-1' src='/img/square.svg'></img>";
 		}
 	}
+	
 	
 	///// FUNCOES DE MODAL /////////////////////////////////////////////////////////////////////////////////////////
 	function openModal(){
 		$('#myModal').modal('show'); 
 
-		var confirmado = './img/icons/component/check-square.svg';
+		var confirmado = './img/check-square.svg';
 		var pathAtual  = $('#ico-1').attr('src');
 
 		if(pathAtual === confirmado){
-			$('#staticBackdropLabel').text('Cancelar');
-			$('#infoID').text('Deseja cancelar o agendamento?');
+			$('#infoID').text('Deseja desativar o evento?');
 		}else {
-			$('#staticBackdropLabel').text('Confirmar');
-			$('#infoID').text('Deseja confimar o agendamento?');
+			$('#infoID').text('Deseja ativar o evento?');
 		}
 	} 
 
 	function closeModal(){
 		$('#myModal').modal('hide'); 
 
-		var confirmado = './img/icons/component/check-square.svg';
+		var confirmado = './img/check-square.svg';
 		var pathAtual  = $('#ico-1').attr('src');
 
 		if(pathAtual === confirmado){
-			$('#ico-1').attr('src', './img/icons/component/square.svg');
-			$('#staticBackdropLabel').text('Cancelar');
+			$('#ico-1').attr('src', './img/square.svg');
 			$('#infoID').text('Deseja cancelar o agendamento?');
 
 		}else {
-			$('#ico-1').attr('src', './img/icons/component/check-square.svg');
-			$('#staticBackdropLabel').text('Confirmar');
+			$('#ico-1').attr('src', './img/check-square.svg');
 			$('#infoID').text('Deseja confimar o agendamento?');
 		}
 	}
