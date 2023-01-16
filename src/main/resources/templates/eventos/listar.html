@@ -110,7 +110,7 @@
 	function openModal(){
 		$('#myModal').modal('show'); 
 
-		var confirmado = './img/check-square.svg';
+		var confirmado = '/img/check-square.svg';
 		var pathAtual  = $('#ico-1').attr('src');
 
 		if(pathAtual === confirmado){
@@ -123,16 +123,14 @@
 	function closeModal(){
 		$('#myModal').modal('hide'); 
 
-		var confirmado = './img/check-square.svg';
+		var confirmado = '/img/check-square.svg';
 		var pathAtual  = $('#ico-1').attr('src');
 
 		if(pathAtual === confirmado){
-			$('#ico-1').attr('src', './img/square.svg');
-			$('#infoID').text('Deseja cancelar o agendamento?');
+			$('#ico-1').attr('src', '/img/square.svg');
 
 		}else {
-			$('#ico-1').attr('src', './img/check-square.svg');
-			$('#infoID').text('Deseja confimar o agendamento?');
+			$('#ico-1').attr('src', '/img/check-square.svg');
 		}
 	}
 </script>
