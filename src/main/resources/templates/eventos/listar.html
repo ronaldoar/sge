@@ -37,6 +37,7 @@
 			      </div>
 			    </div>
 			  </div>
+			  <input type="hidden" id="hddID"/>
 			</div>
 		  </main>
 		</div>
@@ -83,7 +84,7 @@
                 $('<td>').text(item.titulo),
                 $('<td>').text(parseDate(item.dtIniEvento)),
                 $('<td>').text(parseDate(item.dtFimEvento)),
-                $('<td onclick="openModal(),  alteraMsg('+item.ativo+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo)),
+                $('<td onclick="openModal('+item.id+'),  alteraMsg('+item.ativo+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo, item.id)),
                 $('<td class="table-td-center">').html("<a href='/eventos/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
         	).appendTo('#tblEventosID tbody');
 		});
@@ -97,21 +98,22 @@
 		}
 	}
 	
-	function verificaStatus(ativo){
+	function verificaStatus(ativo, id){
 		if(ativo){
-			return "<img id='ico-1' src='/img/check-square.svg'></img>";
+			return "<img id='ico-"+id+"' src='/img/check-square.svg'></img>";
 		}else {
-			return "<img id='ico-1' src='/img/square.svg'></img>";
+			return "<img id='ico-"+id+"' src='/img/square.svg'></img>";
 		}
 	}
 	
 	
 	///// FUNCOES DE MODAL /////////////////////////////////////////////////////////////////////////////////////////
-	function openModal(){
+	function openModal(id){
 		$('#myModal').modal('show'); 
 
 		var confirmado = '/img/check-square.svg';
-		var pathAtual  = $('#ico-1').attr('src');
+		var pathAtual  = $('#ico-'+id).attr('src');
+		$('#hddID').val('#ico-'+id);
 
 		if(pathAtual === confirmado){
 			$('#infoID').text('Deseja desativar o evento?');
@@ -124,13 +126,14 @@
 		$('#myModal').modal('hide'); 
 
 		var confirmado = '/img/check-square.svg';
-		var pathAtual  = $('#ico-1').attr('src');
+		var idICO      = $('#hddID').val();
+		var pathAtual  = $(idICO).attr('src');
 
 		if(pathAtual === confirmado){
-			$('#ico-1').attr('src', '/img/square.svg');
+			$(idICO).attr('src', '/img/square.svg');
 
 		}else {
-			$('#ico-1').attr('src', '/img/check-square.svg');
+			$(idICO).attr('src', '/img/check-square.svg');
 		}
 	}
 </script>

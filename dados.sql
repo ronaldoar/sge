@@ -30,5 +30,8 @@ INSERT INTO tb_contato VALUES (null, 1, '2020-10-14 17:29:41','2020-10-14 17:29:
 INSERT INTO tb_contato VALUES (null, 1, '2020-10-14 17:29:41','2020-10-14 17:29:41', 'qwe@xmail.com', 'Superman', '1199999999', 1, 1);
 
 
+insert into tb_evento values (null,1,"Palestra","2022-09-19 10:32:28", "2022-09-19 10:32:28","Feira Agrishow",1,1, "2022-07-14 13:00:00", "2022-07-14 10:00:00");
+insert into tb_evento values (null,1,"Palestra","2022-09-19 10:32:28", "2022-09-19 10:32:28", "GRI Industrial e Logística",1,1, "2022-03-01 18:00:00", "2022-03-01 15:00:00");
+
 
 

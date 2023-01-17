@@ -27,6 +27,7 @@ public class EventoDto {
 	
 	public static EventoDto parse (Evento evento) {
 		EventoDto e = new EventoDto();
+		e.setId(evento.getId());
 		e.setAtivo(evento.isAtivo());
 		e.setDescricao(evento.getDescricao());
 		e.setDtCadastro(evento.getDtCadastro());
