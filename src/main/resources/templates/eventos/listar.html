@@ -45,6 +45,9 @@
 </html>
 
 <script th:inline="javascript">
+
+	var LISTA = [];
+
 	$(document).ready(function(){
 		listarEventosAjax();
 	});
@@ -52,7 +55,7 @@
 	function listarEventosAjax(){
 		$.ajax({
 		    type: 'GET',
-		    url: 'http://localhost:8090/evento/eventos',
+		    url: 'http://localhost:8080/evento/eventos',
 		    cache: false,
 	        timeout: 600000,
 	        contentType: "application/json",
@@ -60,7 +63,8 @@
 	        statusCode: {
 		
 	    	    200: function(lista){
-	    	    	buildTable(lista);
+	    	    	LISTA = lista;
+	    	    	buildTable();
 	    	    },
 		    	403: function(ex){
 					$('.msg').text(ex.responseText);
@@ -76,26 +80,31 @@
 		});
 	}
 	
-	function buildTable(lista){
+	function buildTable(){
 		
-		$.each(lista, function(i, item){
+		$.each(LISTA, function(i, item){
 			
         	var tr = $('<tr>').append(
                 $('<td>').text(item.titulo),
                 $('<td>').text(parseDate(item.dtIniEvento)),
                 $('<td>').text(parseDate(item.dtFimEvento)),
-                $('<td onclick="openModal('+item.id+'),  alteraMsg('+item.ativo+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo, item.id)),
+                $('<td onclick="openModal('+item.id+'),  alteraMsg('+item.id+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo, item.id)),
                 $('<td class="table-td-center">').html("<a href='/eventos/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
         	).appendTo('#tblEventosID tbody');
 		});
 	}
 	
-	function alteraMsg(ativo){
-		if(ativo){
+	function alteraMsg(id){
+		
+		var item = LISTA.find(l => l.id === id);
+		
+		if(item.ativo){
 			$('#txtID').text("Desativar evento");
 		}else {
 			$('#txtID').text("Ativar evento");		
 		}
+		
+		item.ativo = item.ativo ? false : true;
 	}
 	
 	function verificaStatus(ativo, id){
