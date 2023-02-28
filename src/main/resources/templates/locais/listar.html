@@ -1,47 +1,153 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 	<head><meta charset="UTF-8" /></head>
 	<body>
 		<div layout:fragment="body">	
 		   <main class="container">
-			  <div class="bg-light p-5 rounded mt-3">
+			 <div class="bg-light p-5 rounded mt-3">
 			    <h1>Locais</h1>
-			    <p class="lead">This example is a quick exercise to illustrate how the bottom navbar works.</p>
+			    <p class="lead">Lista de  locais cadastrados no sistema.</p>
 			    
 			    
-			    <table class="table">
+			    <table class="table" id="tblLocaisID">
 				  <thead>
 				    <tr>
-				      <th scope="col">ID</th>
+				      <th scope="col">ENDEREÇO</th>
+				      <th scope="col">NUMERO</th>
+				      <th scope="col">BAIRRO</th>
+				      <th scope="col">CEP</th>
 				      <th scope="col">CIDADE</th>
-				      <th scope="col">UF</th>
-				      <th scope="col">Handle</th>
+				      <th scope="col" class="table-td-center">ATIVO</th>
+				      <th scope="col" class="table-td-center">DETALHES</th>
 				    </tr>
 				  </thead>
-				  <tbody>
-				    <tr>
-				      <th scope="row">1</th>
-				      <td>Mark</td>
-				      <td>Otto</td>
-				      <td>@mdo</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">2</th>
-				      <td>Jacob</td>
-				      <td>Thornton</td>
-				      <td>@fat</td>
-				    </tr>
-				    <tr>
-				      <th scope="row">3</th>
-				      <td colspan="2">Larry the Bird</td>
-				      <td>@twitter</td>
-				    </tr>
-				  </tbody>
-				</table>
-							    
-			    
+				  <tbody></tbody>
+				</table> 
 			  </div>
+			  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="txtID"></h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <span id="infoID"></span>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			        <button type="button" onclick="closeModal()" class="btn btn-primary">Confirmar</button>
+			      </div>
+			    </div>
+			  </div>
+			  <input type="hidden" id="hddID"/>
+			</div>
 			</main>
 		</div>
 	</body>
 </html>
+
+<script th:inline="javascript">
+
+	var LISTA = [];
+
+	$(document).ready(function(){
+		listarLocaisAjax();
+	});
+	
+	function listarLocaisAjax(){
+		$.ajax({
+		    type: 'GET',
+		    url: 'http://localhost:8080/local/listar',
+		    cache: false,
+	        timeout: 600000,
+	        contentType: "application/json",
+	        dataType: 'json',
+	        statusCode: {
+		
+	    	    200: function(lista){
+	    	    	LISTA = lista;
+	    	    	buildTable();
+	    	    },
+		    	403: function(ex){
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+		    		console.log('[NEGADO]: '+JSON.stringify(ex));
+		    	},
+	    	    500: function(ex) {
+					$('.msg').text(ex.responseText);
+		            $('.msg').show();
+					console.log('[ERROR]: '+JSON.stringify(ex));
+		    	}
+		    }
+		});
+	}
+	
+	function buildTable(){
+		
+		$.each(LISTA, function(i, item){
+			
+        	var tr = $('<tr>').append(
+                $('<td>').text(item.endereco),
+                $('<td>').text(item.numero),
+                $('<td>').text(item.bairro),
+                $('<td>').text(item.cep),
+                $('<td>').text(item.cidade),
+                $('<td onclick="openModal('+item.id+'),  alteraMsg('+item.id+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo, item.id)),
+                $('<td class="table-td-center">').html("<a href='/locais/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
+        	).appendTo('#tblLocaisID tbody');
+		});
+	}
+	
+	function alteraMsg(id){
+		
+		var item = LISTA.find(l => l.id === id);
+		
+		if(item.ativo){
+			$('#txtID').text("Desativar evento");
+		}else {
+			$('#txtID').text("Ativar evento");		
+		}
+		
+		item.ativo = item.ativo ? false : true;
+	}
+	
+	function verificaStatus(ativo, id){
+		if(ativo){
+			return "<img id='ico-"+id+"' src='/img/check-square.svg'></img>";
+		}else {
+			return "<img id='ico-"+id+"' src='/img/square.svg'></img>";
+		}
+	}
+	
+	
+	///// FUNCOES DE MODAL /////////////////////////////////////////////////////////////////////////////////////////
+	function openModal(id){
+		$('#myModal').modal('show'); 
+
+		var confirmado = '/img/check-square.svg';
+		var pathAtual  = $('#ico-'+id).attr('src');
+		$('#hddID').val('#ico-'+id);
+
+		if(pathAtual === confirmado){
+			$('#infoID').text('Deseja desativar o evento?');
+		}else {
+			$('#infoID').text('Deseja ativar o evento?');
+		}
+	} 
+
+	function closeModal(){
+		$('#myModal').modal('hide'); 
+
+		var confirmado = '/img/check-square.svg';
+		var idICO      = $('#hddID').val();
+		var pathAtual  = $(idICO).attr('src');
+
+		if(pathAtual === confirmado){
+			$(idICO).attr('src', '/img/square.svg');
+
+		}else {
+			$(idICO).attr('src', '/img/check-square.svg');
+		}
+	}
+</script>
