@@ -19,6 +19,7 @@
 				      <th scope="col">CIDADE</th>
 				      <th scope="col" class="table-td-center">ATIVO</th>
 				      <th scope="col" class="table-td-center">DETALHES</th>
+				      <th scope="col" class="table-td-center">EDITAR</th>
 				    </tr>
 				  </thead>
 				  <tbody></tbody>
@@ -94,7 +95,8 @@
                 $('<td>').text(item.cep),
                 $('<td>').text(item.cidade),
                 $('<td onclick="openModal('+item.id+'),  alteraMsg('+item.id+')" class="table-td-center cursor-pointer">').html(verificaStatus(item.ativo, item.id)),
-                $('<td class="table-td-center">').html("<a href='/locais/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>")
+                $('<td class="table-td-center">').html("<a href='/locais/consultar/"+item.id+"'><img src='/img/search.svg'></img></a>"),
+                $('<td class="table-td-center">').html("<a href='/local/consultar/"+item.id+"'><img src='/img/edit.svg'></img></a>")
         	).appendTo('#tblLocaisID tbody');
 		});
 	}

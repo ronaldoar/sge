@@ -20,9 +20,7 @@ public class LocalDto {
 	public static List<LocalDto> parse(List<Local>locais){
 		List<LocalDto>lista = new ArrayList<LocalDto>();
 		
-		locais.forEach(local -> {
-			lista.add( parse(local) );
-		});
+		locais.forEach(local -> { lista.add( parse(local));});
 		return lista;
 	}
 	
@@ -87,6 +85,5 @@ public class LocalDto {
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
-	
 	
 }

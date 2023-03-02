@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+	<head>
+		<meta charset="UTF-8" />
+		<!--<link th:href="@{/css/contato.css}" rel="stylesheet" />-->
+	</head>
+	<body>
+		<div layout:fragment="body">	
+		   <main class="container">
+		       <input type="hidden"/>
+		   
+			  <span class="hideLocal" th:text="${local}"></span>
+			  			  
+			  <div class="bg-light p-5 rounded mt-3">
+			    <h1>Local</h1>
+			    <p class="lead">Atualizar informações sobre o local.</p>
+			    
+			    <form class="row g-3">
+				  <div class="col-md-6">
+				    <label for="enderecoID" class="form-label">Endereço</label>
+				    <input type="text" class="form-control" id="enderecoID">
+				  </div>
+				  <div class="col-md-6">
+				    <label for="numeroID" class="form-label">Numero</label>
+				    <input type="text" class="form-control" id="numeroID">
+				  </div>
+				  <div class="col-12">
+				    <label for="bairroID" class="form-label">Bairro</label>
+				    <input type="text" class="form-control" id="bairroID">
+				  </div>
+				  <div class="col-md-2">
+				     <label for="ativoID" class="form-label">Ativo</label>
+				    <select id="ativoID" class="form-select">
+				      <option selected>Selecione...</option>
+				      <option value="1">Ativo</option>
+				      <option value="2">Inativo</option>
+				    </select>
+				  </div>
+				  <div class="col-12">
+				    <button type="submit" class="btn btn-primary">Atualizar</button>
+				  </div>
+				</form>		  
+				  
+			  </div>
+			</main>
+		</div>
+	</body>
+</html>
+<script th:inline="javascript">
+	$(document).ready(function(){
+		var local = getLocal();
+		buildLocal(local);
+	});
+	
+	function buildLocal(local){
+		$('#enderecoID').val(local.endereco);
+		$('#numeroID').val(loca.numero);
+		$('#bairroID').val(local.bairro);
+	}
+	
+	function getLocal(){
+		return JSON.parse($('.hideLocal').text());
+	}
+
+</script>

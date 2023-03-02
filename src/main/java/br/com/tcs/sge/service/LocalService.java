@@ -1,6 +1,7 @@
 package br.com.tcs.sge.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class LocalService {
 	
 	public List<Local> buscarTodos(){
 		return repository.findAll();
+	}
+	
+	public  Optional<Local> buscarPorId(Long id) {
+		return repository.findById(id);
 	}
 }
