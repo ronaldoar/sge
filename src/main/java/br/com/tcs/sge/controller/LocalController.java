@@ -2,8 +2,6 @@ package br.com.tcs.sge.controller;
 
 import java.util.List;
 
-import com.google.gson.Gson;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.tcs.sge.controller.dto.CategoriaDto;
-import br.com.tcs.sge.controller.dto.ContatoDto;
+import com.google.gson.Gson;
+
 import br.com.tcs.sge.controller.dto.LocalDto;
 import br.com.tcs.sge.service.LocalService;
 
@@ -45,7 +43,7 @@ public class LocalController {
 	public ModelAndView consultar(@PathVariable Long id) {
 		
 		try {
-			 String local    = new Gson().toJson(LocalDto.parse(localService.buscarPorId(id)));		 			 
+			 String local = new Gson().toJson(LocalDto.parse(localService.buscarPorId(id).get()));		 			 
 			 ModelAndView modelAndView = new ModelAndView();	
 			 modelAndView.addObject("local", local);
 			 modelAndView.setViewName("locais/local");
